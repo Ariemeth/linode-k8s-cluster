@@ -1,0 +1,23 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gearforce-https
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`gearforce.metadiversion.com`)
+      services:
+        - kind: Service
+          name: gf1-gearforce
+          port: 80
+      middlewares:
+        - name: security
+  tls:
+    certResolver: le
+    domains:
+      - main: gearforce.metadiversion.com
+        
+    options:
+      name: tlsoptions
