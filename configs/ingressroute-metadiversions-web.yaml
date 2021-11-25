@@ -7,7 +7,7 @@ spec:
     - web
   routes:
     - kind: Rule
-      match: Host(`gf.metadiversions.com`) || Host(`gearforce.metadiversions.com`)
+      match: Host(`gf.metadiversions.com`) || Host(`gearforce.metadiversions.com`) || Host(`hg.metadiversions.com`)
       services:
         - kind: Service
           name: gf1-gearforce
