@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - web
   routes:
-  - match: Host(`gs.metadiversions.com`) && PathPrefix(`/`)
+  - match: Host(`gs.metadiversions.com`)
     kind: Rule
     services:
     - name: gs1-gamestorage
@@ -25,12 +25,15 @@ spec:
   entryPoints:
     - websecure
   routes:
-  - match: Host(`gs.metadiversions.com`) && PathPrefix(`/`)
+  - match: Host(`gs.metadiversions.com`)
     kind: Rule
     services:
     - name: gs1-gamestorage
       port: http
+    middlewares:
+      - name: cors-middleware-gs
   tls:
     certResolver: letsencrypt
     domains:
       - main: gs.metadiversions.com
+      

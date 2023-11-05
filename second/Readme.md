@@ -37,5 +37,5 @@ helm upgrade --install -n gearforce gf1  .\chart\gearforce\
 ## Setup ingress
 
 ```
-kubectl -n gearforce apply -f 04-redirect-scheme.yml -f 06-gs-ingressRoute.yml -f 06-gf2-ingressRoute.yml
+kubectl -n gearforce apply -f 04-redirect-scheme-gearforce.yml -f 04-redirect-scheme-storage.yml -f 04-cors-middleware-gs.yml -f 06-gs-ingressRoute.yml -f 06-gf2-ingressRoute.yml
 ```
