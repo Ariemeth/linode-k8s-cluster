@@ -1,0 +1,33 @@
+
+image:
+  tag: "v2.10.5"
+
+deployment:
+  initContainers:
+    - name: volume-permissions
+      image: traefik:v2.10.5
+      command: ["sh", "-c", "touch /data/acme.json; chown 65532 /data/acme.json; chmod -v 600 /data/acme.json"]
+      securityContext:
+        runAsNonRoot: false
+        runAsGroup: 0
+        runAsUser: 0
+      volumeMounts:
+      - mountPath: /data
+        name: data
+
+
+logs:
+  general:
+    level: WARN
+  access:
+    enabled: false
+    format: json
+
+persistence:
+  enabled: true
+
+certResolvers:
+  letsencrypt:
+    email: ariemethacc@gmail.com
+    tlsChallenge: true
+    storage: /data/acme.json
