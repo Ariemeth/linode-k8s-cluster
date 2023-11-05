@@ -1,0 +1,39 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: http
+  namespace: gearforce
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`gf.metadiversions.com`) || Host(`gf2.metadiversions.com`) || Host(`gearforcge.metadiversions.com`) || Host(`hg.metadiversions.com`) && PathPrefix(`/`)
+    kind: Rule
+    services:
+    - name: gf1-gearforce
+      port: http
+    middlewares:
+      - name: redirectscheme
+
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: https
+  namespace: gearforce
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`gf.metadiversions.com`) || Host(`gf2.metadiversions.com`) || Host(`gearforce.metadiversions.com`) || Host(`hg.metadiversions.com`) && PathPrefix(`/`)
+    kind: Rule
+    services:
+    - name: gf1-gearforce
+      port: http
+  tls:
+    certResolver: letsencrypt
+    domains:
+      - main: gf.metadiversions.com
+      - main: gf2.metadiversions.com
+      - main: gearforce.metadiversions.com
+      - main: hg.metadiversions.com

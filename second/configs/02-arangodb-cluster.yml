@@ -1,0 +1,11 @@
+apiVersion: database.arangodb.com/v1
+kind: ArangoDeployment
+metadata:
+  name: "arangodb1"
+spec:
+  mode: Single
+  externalAccess:
+    type: None
+  tls:
+    caSecretName: None
+  image: 'arangodb/arangodb:3.11.4'
