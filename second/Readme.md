@@ -34,6 +34,12 @@ helm upgrade --install -n storage --set replicaCount=2  --set database.address=$
 helm upgrade --install -n gearforce gf1  .\chart\gearforce\
 ```
 
+## Install NJ playtest gearforce
+
+```
+helm upgrade --install -n playtest --set image.tag=nj gfpt1 .\chart\gearforce\
+```
+
 ## Setup ingress
 
 ```

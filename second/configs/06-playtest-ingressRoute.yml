@@ -1,0 +1,37 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: http
+  namespace: playtest
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`nj.playtest.gearforce.metadiversions.com`) || Host(`nj.playtest.gf.metadiversions.com`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: gfpt1-gearforce
+          port: http
+      middlewares:
+        - name: redirectscheme
+
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: https
+  namespace: playtest
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`nj.playtest.gearforce.metadiversions.com`) || Host(`nj.playtest.gf.metadiversions.com`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: gfpt1-gearforce
+          port: http
+  tls:
+    certResolver: letsencrypt
+    domains:
+      - main: nj.playtest.gf.metadiversions.com
+      - main: nj.playtest.gearforce.metadiversions.com
