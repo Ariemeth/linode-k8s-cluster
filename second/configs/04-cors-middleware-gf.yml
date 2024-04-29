@@ -1,0 +1,20 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: cors-middleware-gf
+  namespace: gearforce
+spec:
+  headers:
+    accessControlAllowMethods:
+      - "GET"
+    accessControlAllowHeaders:
+      - "*"
+    accessControlAllowOriginList:
+      - "*"
+      - "localhost/*"
+      - "https://localhost/"
+      - "https://gf.metadiversions.com/"
+      - "https://gearforce.metadiversions.com/"
+      - "https://nj.playtest.gearforce.metadiversions.com/"
+    accessControlMaxAge: 100
+    addVaryHeader: true
