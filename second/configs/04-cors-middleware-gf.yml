@@ -15,6 +15,7 @@ spec:
       - "https://localhost/"
       - "https://gf.metadiversions.com/"
       - "https://gearforce.metadiversions.com/"
+      - "https://gearforce.app"
       - "https://nj.playtest.gearforce.metadiversions.com/"
     accessControlMaxAge: 100
     addVaryHeader: true

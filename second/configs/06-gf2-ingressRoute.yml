@@ -39,3 +39,25 @@ spec:
       - main: gf2.metadiversions.com
       - main: gearforce.metadiversions.com
       - main: hg.metadiversions.com
+
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: https
+  namespace: gearforce
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`gearforce.app`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: gf1-gearforce
+          port: http
+      middlewares:
+        - name: cors-middleware-gf
+  tls:
+    secretName: gearforce-app-tls
+    domains:
+      - main: gearforce.app

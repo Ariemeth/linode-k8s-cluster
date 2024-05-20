@@ -45,3 +45,8 @@ helm upgrade --install -n playtest --set image.tag=nj gfpt1 .\chart\gearforce\
 ```
 kubectl -n gearforce apply -f 04-redirect-scheme-gearforce.yml -f 04-redirect-scheme-storage.yml -f 04-cors-middleware-gs.yml -f 06-gs-ingressRoute.yml -f 06-gf2-ingressRoute.yml
 ```
+
+## Create a TLS secret for gearforce.app
+```bash
+    kubectl.exe create secret tls gearforce-app-tls --cert=chain.pem --key=generated-private-key.txt -n gearforce
+```
